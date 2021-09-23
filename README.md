@@ -1,0 +1,2 @@
+# UnityLogFileGenerator
+init commit
