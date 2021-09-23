@@ -70,40 +70,47 @@ public class UnityLogFileGenerator : MonoBehaviour
         var logContent = timeStamp + logString;
 
         //根據LogType是否要紀錄stack
-        switch (type)
+        if (bRecordAllStack)
         {
-            case LogType.Error:
-                if (bRecordStackByError || bRecordAllStack)
-                {
-                    logContent = logContent + "\n" + stackTrace;
-                }
-                break;
-            case LogType.Assert:
-                if (bRecordStackByAssert || bRecordAllStack)
-                {
-                    logContent = logContent + "\n" + stackTrace;
-                }
-                break;
-            case LogType.Warning:
-                if (bRecordStackByWarning || bRecordAllStack)
-                {
-                    logContent = logContent + "\n" + stackTrace;
-                }
-                break;
-            case LogType.Log:
-                if (bRecordStackByLog || bRecordAllStack)
-                {
-                    logContent = logContent + "\n" + stackTrace;
-                }
-                break;
-            case LogType.Exception:
-                if (bRecordStackByException || bRecordAllStack)
-                {
-                    logContent = logContent + "\n" + stackTrace;
-                }
-                break;
-            default:
-                break;
+            logContent = logContent + "\n" + stackTrace;
+        }
+        else
+        {
+            switch (type)
+            {
+                case LogType.Error:
+                    if (bRecordStackByError)
+                    {
+                        logContent = logContent + "\n" + stackTrace;
+                    }
+                    break;
+                case LogType.Assert:
+                    if (bRecordStackByAssert)
+                    {
+                        logContent = logContent + "\n" + stackTrace;
+                    }
+                    break;
+                case LogType.Warning:
+                    if (bRecordStackByWarning)
+                    {
+                        logContent = logContent + "\n" + stackTrace;
+                    }
+                    break;
+                case LogType.Log:
+                    if (bRecordStackByLog)
+                    {
+                        logContent = logContent + "\n" + stackTrace;
+                    }
+                    break;
+                case LogType.Exception:
+                    if (bRecordStackByException)
+                    {
+                        logContent = logContent + "\n" + stackTrace;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
         totalLog = totalLog + "\n" + logContent;
         guiLog = guiLog + "\n" + timeStamp + logString; //gui不紀錄stackTrace
